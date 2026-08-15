@@ -1,0 +1,17 @@
+# secrets — 绝不提交
+.env
+*.token
+*_KEY*
+*_TOKEN*
+credentials*
+secrets.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# node
+node_modules/
+dist/
+*.log
