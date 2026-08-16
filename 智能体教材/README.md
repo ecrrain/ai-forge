@@ -14,6 +14,7 @@
 |---|---|---|---|
 | 01 | TIA Portal 博途：把 GUI 打开到用户可见桌面 | agent 环境 GUI 落在隐藏桌面，用 schtasks /it 投到可见桌面 | [01-TIA-Portal-博途-可见桌面打开.md](01-TIA-Portal-博途-可见桌面打开.md) |
 | 02 | 网页图片下载：禁漫天堂类站点完整链路 | 断连≠无解：移动端 API → 换 CDN 域名 → 真浏览器；加密接口 + 切片还原有可验证算法 | [02-网页图片下载-禁漫天堂类站点.md](02-网页图片下载-禁漫天堂类站点.md) |
+| 03 | DeepSeek 接入 Codex | 三步：API key + 官方 models.json + config.toml 的 provider 段；官方一键脚本，Windows 手动等效 | [03-DeepSeek-接入Codex.md](03-DeepSeek-接入Codex.md) |
 
 ## 维护协议
 - 每个新经验 = 一篇教材（本地 `D:\智能体教材` + GitHub 同步）；
