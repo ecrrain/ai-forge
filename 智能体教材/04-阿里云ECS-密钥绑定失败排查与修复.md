@@ -86,6 +86,6 @@ ssh -i <无密码私钥> root@IP "whoami"   # 输出 root = 成功
 - PowerShell 传参陷阱：`-N '""'` 不是空密码，正确写法是 `-N ""`（不加引号传空字符串）或干脆省略 `-N`。
 
 ## 参考
-- 服务器：ECS 121.40.223.43（i-bp1i4wctmjyz81ntlbcr），密钥：`C:\Users\Administrator\Desktop\ecrrain-home\keys\ecrrain_ecs_nopass`
-- 流程规范：桌面 `验证上生产流程.md`
-- 诊断命令记录：桌面 `ECS诊断命令*.txt`（权限、sshd 配置、auth.log、生效配置四轮排查）
+- 服务器：阿里云 ECS（杭州，Ubuntu 24.04.4 LTS）。公网 IP / 实例 ID / 密钥路径属于敏感信息，只保存在本地工作记录中，**不要写入公开仓库**。
+- 流程规范：本地桌面 `验证上生产流程.md`
+- 诊断命令记录：本地桌面 `ECS诊断命令*.txt`（权限、sshd 配置、auth.log、生效配置四轮排查）
