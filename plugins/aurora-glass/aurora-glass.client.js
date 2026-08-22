@@ -22,7 +22,29 @@ for (const name of Object.keys(TOKENS)) {
   PAIRS[name] = { light: TOKENS[name], dark: TOKENS[name] }
 }
 
+// CSS-level token overrides on the base palette selectors: keeps the
+// translucent background even when the theme overrideTokens path is
+// unavailable (e.g. static web-profile mount).
+const TOKEN_CSS = [
+  'body[data-ds-dark-theme], body[data-ds-light-theme], body {',
+  '  --dsw-alias-bg-base: rgba(0, 0, 0, 0.24);',
+  '  --dsw-alias-bg-layer-1: rgba(255, 255, 255, 0.085);',
+  '  --dsw-alias-bg-layer-2: rgba(255, 255, 255, 0.045);',
+  '  --dsw-alias-bg-overlay: rgba(16, 16, 22, 0.58);',
+  '  --dsw-alias-border-l1: rgba(255, 255, 255, 0.12);',
+  '  --dsw-alias-border-l2: rgba(255, 255, 255, 0.20);',
+  '  --dsw-alias-brand-primary: #67e8f9;',
+  '  --dsw-alias-label-primary: #f4f7fb;',
+  '  --dsw-alias-label-secondary: rgba(226, 232, 244, 0.64);',
+  '  --dsw-specific-sidebar-fill: rgba(0, 0, 0, 0.26);',
+  '  --dsw-specific-input-major: rgba(0, 0, 0, 0.38);',
+  '  --dsw-alias-button-elevated-fill: rgba(6, 6, 10, 0.68);',
+  '  --dsw-specific-bubble: rgba(0, 0, 0, 0.18);',
+  '}',
+]
+
 const CSS = [
+  ...TOKEN_CSS,
   'html { background: #000; }',
   'html body { background: transparent; }',
   '#root {',
@@ -94,9 +116,12 @@ const CSS = [
 return {
   name: 'aurora-glass',
   apply(ctx) {
-    const theme = ctx.get('theme')
-    if (theme !== undefined) {
-      ctx.effect(() => theme.overrideTokens('aurora-glass', PAIRS))
+    let theme
+    try { theme = (ctx && ctx.theme) || (ctx && ctx.get && ctx.get('theme')) } catch (e) { theme = undefined }
+    if (theme !== undefined && typeof theme.overrideTokens === 'function') {
+      try {
+        ctx.effect(() => theme.overrideTokens('aurora-glass', PAIRS))
+      } catch (e) { /* CSS token fallback covers this */ }
     }
     ctx.effect(() => styles.insert(CSS))
   },
